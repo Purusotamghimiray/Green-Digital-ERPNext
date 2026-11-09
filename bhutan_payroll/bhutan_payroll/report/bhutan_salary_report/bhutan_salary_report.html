@@ -1,0 +1,119 @@
+<div class="print-format">
+    <style>
+        .salary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9px;
+        }
+        .salary-table th, .salary-table td {
+            border: 1px solid #d1d5db;
+            padding: 4px;
+            vertical-align: middle;
+        }
+        .salary-table th {
+            background-color: #f3f4f6;
+            font-weight: 600;
+            text-align: center;
+        }
+        .header-main {
+            background-color: #1e4d2b !important;
+            color: #ffffff;
+        }
+        .header-sub {
+            background-color: #2e7d32 !important;
+            color: #ffffff;
+        }
+        .total-row {
+            background-color: #e8f5e9;
+            font-weight: bold;
+        }
+    </style>
+
+    <div class="text-center" style="margin-bottom: 16px;">
+        <h3 style="font-weight: bold; text-transform: uppercase; margin: 0;">{{ filters.company || "Salary Register" }}</h3>
+        <p style="margin: 4px 0 0 0; font-size: 13px; color: #4b5563;">
+            Salary for Month of
+            {% set month_num = filters.month | int %}
+            {% set month_names = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] %}
+            {{ month_names[month_num - 1] if month_num >= 1 and month_num <= 12 else filters.month }}, {{ filters.year }}
+        </p>
+    </div>
+
+    <table class="salary-table">
+        <thead>
+            <tr>
+                <th rowspan="2" class="header-main" style="width: 25px;">SL</th>
+                <th rowspan="2" class="header-main" style="width: 130px;">Employee</th>
+                <th rowspan="2" class="header-main" style="width: 80px;">Designation</th>
+                <th rowspan="2" class="header-main" style="width: 75px;">Account No.</th>
+                <th rowspan="2" class="header-main" style="width: 60px;">TPN</th>
+                <th colspan="11" class="header-main">Gross Earnings</th>
+                <th colspan="8" class="header-main">Deductions</th>
+                <th rowspan="2" class="header-main">Total Ded.</th>
+                <th rowspan="2" class="header-main">Net Salary</th>
+                <th rowspan="2" class="header-main">Taxable Amt</th>
+            </tr>
+            <tr>
+                <!-- Earnings Columns -->
+                <th class="header-sub">TFMR</th>
+                <th class="header-sub">Corp.</th>
+                <th class="header-sub">Proj.</th>
+                <th class="header-sub">Fixed</th>
+                <th class="header-sub">Comm.</th>
+                <th class="header-sub">Hard.</th>
+                <th class="header-sub">Shift</th>
+                <th class="header-sub">Skill</th>
+                <th class="header-sub">Ret.</th>
+                <th class="header-sub">Offic.</th>
+                <th class="header-sub">Gross</th>
+                <!-- Deductions Columns -->
+                <th class="header-sub">GIS</th>
+                <th class="header-sub">PF</th>
+                <th class="header-sub">Welfare</th>
+                <th class="header-sub">Adv.</th>
+                <th class="header-sub">Loan</th>
+                <th class="header-sub">PIT</th>
+                <th class="header-sub">HC</th>
+                <th class="header-sub">Other</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td class="text-center">{{ row.sl_no }}</td>
+                <td>{{ row.employee_name }}</td>
+                <td>{{ row.designation }}</td>
+                <td>{{ row.account_number }}</td>
+                <td class="text-center">{{ row.tpn_no }}</td>
+
+                <!-- Earnings Breakdown -->
+                <td class="text-right">{{ format_currency(row.tfmr) }}</td>
+                <td class="text-right">{{ format_currency(row.corporate_allowance) }}</td>
+                <td class="text-right">{{ format_currency(row.project_allowance) }}</td>
+                <td class="text-right">{{ format_currency(row.fixed_allowance) }}</td>
+                <td class="text-right">{{ format_currency(row.communication_allowance) }}</td>
+                <td class="text-right">{{ format_currency(row.hardship_allowance) }}</td>
+                <td class="text-right">{{ format_currency(row.shift_allowance) }}</td>
+                <td class="text-right">{{ format_currency(row.specialized_skills_allowance) }}</td>
+                <td class="text-right">{{ format_currency(row.talent_retention_allowance) }}</td>
+                <td class="text-right">{{ format_currency(row.officiating_allowance) }}</td>
+                <td class="text-right" style="font-weight: bold;">{{ format_currency(row.gross_salary) }}</td>
+
+                <!-- Deductions Breakdown -->
+                <td class="text-right">{{ format_currency(row.gis) }}</td>
+                <td class="text-right">{{ format_currency(row.pf) }}</td>
+                <td class="text-right">{{ format_currency(row.employee_welfare) }}</td>
+                <td class="text-right">{{ format_currency(row.salary_advance) }}</td>
+                <td class="text-right">{{ format_currency(row.loan) }}</td>
+                <td class="text-right">{{ format_currency(row.pit) }}</td>
+                <td class="text-right">{{ format_currency(row.health_contribution) }}</td>
+                <td class="text-right">{{ format_currency(row.other_deductions) }}</td>
+
+                <td class="text-right" style="font-weight: bold;">{{ format_currency(row.total_deduction) }}</td>
+                <td class="text-right" style="font-weight: bold; background-color: #fafafa;">{{ format_currency(row.net_salary) }}</td>
+                <td class="text-right">{{ format_currency(row.taxable_amount) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
