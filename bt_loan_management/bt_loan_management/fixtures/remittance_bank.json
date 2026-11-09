@@ -1,0 +1,27 @@
+[
+  {
+    "doctype": "Remittance Bank",
+    "name": "BDBL",
+    "bank_name": "BDBL"
+  },
+  {
+    "doctype": "Remittance Bank",
+    "name": "BoB",
+    "bank_name": "BoB"
+  },
+  {
+    "doctype": "Remittance Bank",
+    "name": "NPPF",
+    "bank_name": "NPPF"
+  },
+  {
+    "doctype": "Remittance Bank",
+    "name": "Druk PNB",
+    "bank_name": "Druk PNB"
+  },
+  {
+    "doctype": "Remittance Bank",
+    "name": "BTL",
+    "bank_name": "BTL"
+  }
+]

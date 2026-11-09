@@ -1,0 +1,133 @@
+<style>
+    @media print {
+        @page {
+            size: A4 landscape;
+            margin: 12mm 10mm 15mm 10mm;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 8.5pt;
+            color: #111;
+        }
+        .no-print { display: none !important; }
+    }
+    .report-header {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .report-header h2 {
+        margin: 0;
+        font-size: 15pt;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+    .report-header h3 {
+        margin: 4px 0;
+        font-size: 11pt;
+        font-weight: 600;
+        color: #333;
+    }
+    .report-header p {
+        margin: 2px 0 0;
+        font-size: 8.5pt;
+        color: #666;
+    }
+    table.gdl-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+    table.gdl-table th, table.gdl-table td {
+        border: 1px solid #333;
+        padding: 5px 4px;
+        font-size: 8pt;
+        line-height: 1.2;
+    }
+    table.gdl-table th {
+        background-color: #f2f2f2 !important;
+        font-weight: 700;
+        text-align: center;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    table.gdl-table td.center { text-align: center; }
+    table.gdl-table td.right { text-align: right; }
+    table.gdl-table tr.total-row td {
+        font-weight: 700;
+        background-color: #fafafa !important;
+        border-top: 2px solid #000;
+    }
+    .signatures {
+        margin-top: 40px;
+        display: flex;
+        justify-content: space-between;
+        page-break-inside: avoid;
+    }
+    .sig-box {
+        width: 28%;
+        text-align: center;
+        border-top: 1px dotted #333;
+        padding-top: 6px;
+        font-size: 8.5pt;
+        font-weight: 600;
+    }
+</style>
+
+<div class="report-header">
+    <h2>GDL / DHI EMPLOYEE LOAN REPAYMENT & BT SCHEME REMITTANCE</h2>
+    <h3>Monthly Bank Deduction Schedule</h3>
+    <p>Printed on: {{ frappe.datetime.now_date() }} | Currency: BTN (Nu.)</p>
+</div>
+
+<table class="gdl-table">
+    <thead>
+        <tr>
+            <th style="width: 3%;">Sl</th>
+            <th style="width: 8%;">Emp ID</th>
+            <th style="width: 13%;">Employee Name</th>
+            <th style="width: 6%;">Bank</th>
+            <th style="width: 13%;">Loan Type</th>
+            <th style="width: 10%;">Loan Acc No.</th>
+            <th style="width: 10%;">Assignment No.</th>
+            <th style="width: 9%;">Loan Amount</th>
+            <th style="width: 9%;">Monthly Deduction</th>
+            <th style="width: 7%;">Start Date</th>
+            <th style="width: 7%;">End Date</th>
+            <th style="width: 5%;">BFSC</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% var total_loan = 0; var total_ded = 0; %}
+        {% for (var i = 0; i < data.length; i++) { %}
+            {% var row = data[i]; %}
+            {% total_loan += (row.loan_amount || 0); %}
+            {% total_ded += (row.monthly_deduction || 0); %}
+            <tr>
+                <td class="center">{{ i + 1 }}</td>
+                <td class="center">{{ row.employee || "" }}</td>
+                <td>{{ row.employee_name || "" }}</td>
+                <td class="center">{{ row.bank_name || "" }}</td>
+                <td>{{ row.loan_type || "" }}</td>
+                <td class="center">{{ row.loan_acc_no || "-" }}</td>
+                <td class="center">{{ row.assignment_number || "-" }}</td>
+                <td class="right">{{ format_currency(row.loan_amount) }}</td>
+                <td class="right">{{ format_currency(row.monthly_deduction) }}</td>
+                <td class="center">{{ row.start_date || "" }}</td>
+                <td class="center">{{ row.end_date || "" }}</td>
+                <td class="center">{{ row.bfsc_code || "-" }}</td>
+            </tr>
+        {% } %}
+        <tr class="total-row">
+            <td colspan="7" class="right">TOTAL</td>
+            <td class="right">{{ format_currency(total_loan) }}</td>
+            <td class="right">{{ format_currency(total_ded) }}</td>
+            <td colspan="3"></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="signatures">
+    <div class="sig-box">Prepared By (HR Officer)</div>
+    <div class="sig-box">Verified By (Accounts)</div>
+    <div class="sig-box">Approved By (Head of Finance)</div>
+</div>

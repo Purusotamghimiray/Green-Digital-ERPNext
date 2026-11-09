@@ -1,0 +1,32 @@
+[
+  {
+    "doctype": "External Loan Type",
+    "name": "BoB Loan",
+    "loan_type": "BoB Loan"
+  },
+  {
+    "doctype": "External Loan Type",
+    "name": "Loan - NPPF remittance",
+    "loan_type": "Loan - NPPF remittance"
+  },
+  {
+    "doctype": "External Loan Type",
+    "name": "NPPF New Member Loan",
+    "loan_type": "NPPF New Member Loan"
+  },
+  {
+    "doctype": "External Loan Type",
+    "name": "BDBL Loan",
+    "loan_type": "BDBL Loan"
+  },
+  {
+    "doctype": "External Loan Type",
+    "name": "BTL Scheme Remittance",
+    "loan_type": "BTL Scheme Remittance"
+  },
+  {
+    "doctype": "External Loan Type",
+    "name": "Druk PNB Loan",
+    "loan_type": "Druk PNB Loan"
+  }
+]

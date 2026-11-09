@@ -1,0 +1,224 @@
+{
+  "actions": [],
+  "autoname": "format:ELS-{employee}-{#####}",
+  "creation": "2026-11-04 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "employee_details_section",
+    "employee",
+    "employee_name",
+    "col_break_1",
+    "bank_name",
+    "loan_type",
+    "status",
+    "loan_details_section",
+    "loan_acc_no",
+    "assignment_number",
+    "bfsc_code",
+    "col_break_2",
+    "loan_amount",
+    "monthly_deduction",
+    "salary_component",
+    "schedule_tenure_section",
+    "start_date",
+    "col_break_3",
+    "end_date",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "employee_details_section",
+      "fieldtype": "Section Break",
+      "label": "Employee Details"
+    },
+    {
+      "fieldname": "employee",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Emp ID",
+      "options": "Employee",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "employee.employee_name",
+      "fieldname": "employee_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Employee Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "col_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "bank_name",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Bank Name",
+      "options": "Remittance Bank",
+      "reqd": 1
+    },
+    {
+      "fieldname": "loan_type",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Loan Type",
+      "options": "External Loan Type",
+      "reqd": 1
+    },
+    {
+      "default": "Draft",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Status",
+      "no_copy": 1,
+      "options": "Draft\nActive\nCompleted\nCancelled",
+      "read_only": 1
+    },
+    {
+      "fieldname": "loan_details_section",
+      "fieldtype": "Section Break",
+      "label": "Loan Details & Account Identifiers"
+    },
+    {
+      "fieldname": "loan_acc_no",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Loan Acc No."
+    },
+    {
+      "fieldname": "assignment_number",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Assignment Number"
+    },
+    {
+      "fieldname": "bfsc_code",
+      "fieldtype": "Data",
+      "label": "BFSC code For DHI"
+    },
+    {
+      "fieldname": "col_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "loan_amount",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Loan Amount",
+      "reqd": 1
+    },
+    {
+      "fieldname": "monthly_deduction",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Monthly Salary deduction",
+      "reqd": 1
+    },
+    {
+      "fetch_from": "loan_type.salary_component",
+      "fieldname": "salary_component",
+      "fieldtype": "Link",
+      "label": "Salary Component",
+      "options": "Salary Component",
+      "reqd": 1
+    },
+    {
+      "fieldname": "schedule_tenure_section",
+      "fieldtype": "Section Break",
+      "label": "Repayment Duration"
+    },
+    {
+      "fieldname": "start_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Start Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "col_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "end_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "End Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Employee Loan Schedule",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-11-04 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Loan Remittance",
+  "name": "Employee Loan Schedule",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "HR Manager",
+      "share": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "HR User",
+      "share": 0,
+      "submit": 0,
+      "cancel": 0,
+      "amend": 0,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}
